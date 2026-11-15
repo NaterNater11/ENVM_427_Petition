@@ -1,0 +1,198 @@
+/*Sets the minimum width of screen resolution, and creates buffers around the page*/
+main {
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-bottom: 5%;
+	min-width: 500px
+}	
+
+/*Zoomed in background on all pages that shifts between pink and turqiouse*/
+body {
+  background: linear-gradient(-45deg, #Ffc0cb, #D3D3D3, #40E0D0);
+  background-size: 500% 500%;
+  position: relative;
+  animation: shift 15s ease-in-out infinite;
+}
+
+/*Creates the background colouring, will pan from left to right and move slightly vertically*/
+@keyframes shift {
+	0% {
+		background-position: 0% 0%;
+	}
+	50% {
+			background-position: 100% 40%;
+		}
+	100% {
+		background-position: 0% 0%;
+	}
+}
+
+/*Buttons signified by tan backgrounds (unless otherwise specified), curved edges, and cursor change to pointer*/
+button {
+	font-size: 4vmin;
+	background-color: tan;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+/*Largest header used to catch people's attention. Orange banner and large font visible for all screens*/
+h1 {
+	background-color: #febd59;
+	font-size: 6vmin;
+}
+
+/*Medium header that is used to describe groupings, defined by a slightly smaller font*/
+h2 {
+	background-color: white;
+	font-size: 5vmin;
+}
+
+/*Smallest header used for listing items, typically used below a larger header, smallest header font (larger then paragraph)*/
+h3 {
+	background-color: beige;
+	font-size: 4vmin;
+}
+
+h4 {
+	background-color: white;
+	font-size: 5vmin;
+}
+
+/*Selecting perfered font, and a good size for all screens*/
+p {
+  font-family: timesnewroman;
+  font-size: 3vmin;
+}
+
+
+/*Roughly centers all form components, and creates spacing between each*/
+label {
+	margin-left: 30%;
+	vertical-align: top;
+	display: inline-block;
+	margin-bottom: 4%;
+}
+
+/*Defines text box spacing to better fit varius screens*/
+input[type=text] {
+	vertical-align: 5px;
+	width: 22vw;
+	box-sizing: border-box;
+	padding: 0 0 10px 0;
+}
+
+/*Allows for vertical expansion of textarea, with a limit*/
+textarea {
+	resize: vertical;
+	max-height: 100px;
+	width: 25%;
+}
+
+/*More user friendly visual*/
+checkbox:hover {
+	cursor: pointer;
+}
+
+/*Formatting the reset button to appear more visually appearing, give mouse feedback*/
+input[type=reset] {
+	height: 55px;
+	width: 90px;
+	margin-left: 36%;
+	cursor: pointer;
+	border-radius:5px;
+}
+
+/*Formatting the submit button to appear more visually appearing, give mouse feedback*/
+input[type=submit] {
+	height: 55px;
+	width: 90px;
+	margin-left: 10%;
+	cursor: pointer;
+	border-radius:5px;
+}
+
+
+
+
+/*Sets font size and spacing for the clock display*/
+#Display {
+	font-size: 2.7vmin;
+	margin-left: 68vw;
+	max-height: 60px
+}
+
+/*Placed below the award banner, list of awards each seperated by spacing (from break statements), curved edges for visual appeal*/
+.second h3{
+	float: right;
+	width: 33%;
+	border-radius: 0px 0px 35px 35px;
+	padding-left: 3%;
+	padding-top: 3%;
+	padding-right: 3%;
+}
+
+/*Identifying the purpose of the upcoming form, corners rounded for visual appeal*/
+.third h1{
+	padding-top: 25px;
+	padding-bottom: 25px;
+	margin-bottom: -40px;
+	border-radius: 35px 35px 0px 0px;
+	margin-left:5%;
+	padding-left:5%;
+	margin-right:5%;
+	padding-right:5%;
+}
+
+.third h2{
+	padding-top: 25px;
+	padding-bottom: 25px;
+	margin-bottom: -40px;
+	margin-left:5%;
+	padding-left:5%;
+	margin-right:5%;
+	padding-right:5%;
+}
+
+/*Provides a pleasent backdrop for the form's information*/
+.third h3{
+	padding-top: 25px;
+	padding-bottom: 25px;
+	border-radius: 0px 0px 35px 35px;
+	margin-left:5%;
+	padding-left:5%;
+	margin-right:5%;
+	padding-right:5%;
+}
+
+.third h4{
+	padding-top: 25px;
+	padding-bottom: 25px;
+	margin-bottom: -40px;
+	border-radius: 35px 35px 0px 0px;
+	margin-left:5%;
+	padding-left:5%;
+	margin-right:5%;
+	padding-right:5%;
+}
+
+/*Change colour to make it stand out*/
+#Count {
+	background-color: orange;
+}
+
+#signature-pad {
+    background-color: white;
+
+    display: block;
+    margin: 25px auto;
+	border-radius: 0px 0px 35px 35px;
+    width: 90%;
+}
+
+#clear-signature {
+    display: block;
+    margin: 15px auto;
+    padding: 8px 12px;
+
+    background-color: white;
+}

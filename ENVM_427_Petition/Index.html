@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--Set Up-->
+<head>
+	<meta charset="utf-8" />
+	<meta name="keywords" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--accessing CSS forms-->
+	<link rel="stylesheet" href="Petition_stylesheet.css">
+	<!--Page Name-->
+	<title> Data Center Petition </title>
+</head>
+
+<main class="third">
+	
+	<h1 align="middle"> Sign the Petition </h1>
+	<h2 align="middle"> Required </h2>
+	
+	<h3>
+		<form method="post">
+	
+			<!--Box requesting user's first name, only accepts letters and is mandatory-->
+			<label for="fname"> First Name: </label>
+			<input type="text" id="fname" name="fname" pattern="[A-Za-z]*" title="Use only letters" placeholder="John" required>
+
+			<!--Box requesting user's last name, only accepts letters and is mandatory-->
+			<label for="lname"> Last Name: </label>
+			<input type="text" id="lname" name="lname" pattern="[A-Za-z]*" title="Use only letters" placeholder="Doe" required>
+			
+			<!--Box requesting user's last name, only accepts numbers and is mandatory-->
+			<label for="email"> Email: </label>
+			<input type="text" id="email" name="email" placeholder="JohnDoe@gmail.com" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="email" required>
+			
+			<!--Box requesting user's street name, accepts letters and numbers-->
+			<label for="postcode"> Postcode: </label>
+			<input type="text" id="postcode" name="postcode" placeholder="A1B 2C3" pattern="[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]" required title="Three number or digits followed by another three">
+			
+			<!--checkbox requesting whether they'd like to be contacted back-->
+			<label for="contact me"> Sign up for Newsletter: </label>
+			<input type="checkbox" id="contact" name="contact">
+		</h3> <br /> <br />
+
+		
+		<h4 align="middle"> Signature </h4>
+
+		        <canvas id="signature-pad"
+                    width="800"
+                    height="200">
+            </canvas>
+
+            <input type="hidden"
+                   id="signatureData"
+                   name="signatureData">
+
+
+            <button type="button" id="clear-signature">
+                Clear
+            </button>
+
+<br><br>
+
+
+<br><br>
+
+
+
+		<h4 align="middle"> Optional </h4>
+		<h3>
+			<!--Box requesting user's last name, only accepts numbers and is mandatory-->
+			<label for="phone"> Phone Number: </label>
+			<input type="text" id="phone" name="phone" placeholder="123-456-7890" pattern="\d{3}-\d{3}-\d{4}" title="phone number composed of 10 digits">
+
+			<!--Dropdown bar to select user's relation to university-->
+			<label for="concern">Biggest Concern:</label>
+			<select name="concern" id="concern">
+				<option value="Water">Water</option>
+				<option value="Energy">Energy</option>
+				<option value="Emissions">Emissions</option>
+				<option value="Noise">Noise</option>
+				<option value="Other">Other</option>
+			</select>
+			
+			<!--Box for additional information to be sent-->
+			<label for="info"> Share Your Thoughts: </label>
+			<textarea id="info" name="info" placeholder="Briefly describe your opinion on data centers"></textarea> <br /> <br />
+			
+		</h3>
+		
+		<!--deletes all previous filled out information-->
+		<input type="reset" value="Reset"
+			   style="background-color: orange" />
+		
+		<!--sends all filled out information (to linked address if added) if required boxes are filled and boxes follow correct patterns-->
+		<input type="submit" value="submit"
+			   style="background-color: tan" />
+		</form>
+	
+	</h3>
+	
+</main>
+    <script>
+		
+        const canvas = document.getElementById("signature-pad");
+        const ctx = canvas.getContext("2d");
+        const hiddenInput = document.getElementById("signatureData");
+
+        let drawing = false;
+		let hasSigned = false;
+
+        ctx.lineWidth = 2;
+        ctx.lineCap = "round";
+        ctx.strokeStyle = "black";
+
+        function getPos(event) {
+            const rect = canvas.getBoundingClientRect();
+
+            return {
+                x: (event.clientX - rect.left) * (canvas.width / rect.width),
+                y: (event.clientY - rect.top) * (canvas.height / rect.height)
+            };
+        }
+		
+		canvas.addEventListener("pointermove", function(event) {
+    if (!drawing) return;
+
+    hasSigned = true;
+
+    const pos = getPos(event);
+
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+});
+
+document.getElementById("clear-signature")
+.addEventListener("click", function() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hasSigned = false;
+});
+
+document.querySelector("form")
+.addEventListener("submit", function(event) {
+
+    if (!hasSigned) {
+        alert("Please provide a signature before submitting the petition.");
+        event.preventDefault();
+        return;
+    }
+
+    hiddenInput.value = canvas.toDataURL("image/png");
+});
+
+        canvas.addEventListener("pointerdown", function(event) {
+            drawing = true;
+
+            const pos = getPos(event);
+
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+        });
+
+        canvas.addEventListener("pointermove", function(event) {
+            if (!drawing) return;
+
+            const pos = getPos(event);
+
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+        });
+
+        canvas.addEventListener("pointerup", function() {
+            drawing = false;
+        });
+
+        canvas.addEventListener("pointerleave", function() {
+            drawing = false;
+        });
+
+        document.getElementById("clear-signature")
+            .addEventListener("click", function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+
+        document.querySelector("form")
+            .addEventListener("submit", function() {
+                hiddenInput.value = canvas.toDataURL("image/png");
+            });
+    </script>
+
+</body>
+
+</html>
